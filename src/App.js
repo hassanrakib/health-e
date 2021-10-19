@@ -1,13 +1,41 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
-// delete this one later
+import TopBanner from './components/TopBanner/TopBanner';
 import TopNav from './components/TopNav/TopNav';
+import Services from './components/Services/Services';
+import ServicesProvider from './contexts/ServicesProvider';
+import Footer from './components/Footer/Footer';
+import ServiceDetails from './components/ServiceDetails/ServiceDetails';
+import UserAccount from './components/UserAccount/UserAccount';
+import AuthProvider from './contexts/AuthProvider';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
-    <BrowserRouter>
-      <TopNav></TopNav>
-    </BrowserRouter>
+    <AuthProvider>
+      <ServicesProvider>
+        <BrowserRouter>
+          <TopNav></TopNav>
+          <Switch>
+            <Route exact path='/'>
+              <TopBanner></TopBanner>
+              <Services></Services>
+            </Route>
+            <Route path='/home'>
+              <TopBanner></TopBanner>
+              <Services></Services>
+            </Route>
+            <PrivateRoute path='/service/:id'>
+              <ServiceDetails></ServiceDetails>
+            </PrivateRoute>
+            <Route path='/login'>
+              <UserAccount></UserAccount>
+            </Route>
+          </Switch>
+          <Footer></Footer>
+        </BrowserRouter>
+      </ServicesProvider>
+    </AuthProvider>
   );
 }
 

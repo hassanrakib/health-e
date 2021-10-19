@@ -4,10 +4,13 @@ import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import './TopNav.css';
+import useAuth from '../../hooks/useAuth';
 
 const TopNav = () => {
+    const {user, logOut} = useAuth();
     return (
-        <Navbar collapseOnSelect expand="lg" sticky="top">
+        <Navbar variant="light" collapseOnSelect expand="lg" className='position-absolute w-100 nav-container'>
             <Container>
                 <Navbar.Brand as={NavLink} to="/">
                     <img
@@ -24,14 +27,15 @@ const TopNav = () => {
                     <Nav className="ms-auto">
                         <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
                         <Nav.Link as={NavLink} to="/pricing">Pricing</Nav.Link>
-
                     </Nav>
                     <Nav>
                         <Nav.Link as={NavLink} to="/login">
                             <Button variant="info" className='text-white px-3'>
                                 <FontAwesomeIcon icon={faUser} className='me-2' />
-                                Login
-                                </Button>
+                                {
+                                    user.email ? 'Logout' : 'Login'
+                                }
+                            </Button>
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

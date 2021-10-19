@@ -1,0 +1,61 @@
+ [
+  {
+    "id": 1,
+    "serviceName": "COVID-19 Consulting",
+    "description": "Specialized mental health support for COVID-19 situation. This pendemic is causing people to go down mentally. We will help you on that with one to one video calling.",
+    "iconImg": "https://i.ibb.co/Wc0xjGR/virus.png",
+    "price": "20",
+    "time": "30",
+    "through": "Zoom Video Call",
+    "img": "https://i.ibb.co/2M5g11B/covid.jpg"
+  },
+  {
+    "id": 2,
+    "serviceName": "Mental Health",
+    "description": "Mental health affects how we think, feel, and act as we cope with life. So, we got such psychiatrist for you who can be your friend.",
+    "iconImg": "https://i.ibb.co/ysp638V/mental-health.png",
+    "price": "30",
+    "time": "40",
+    "through": "Google Meet Call",
+    "img": "https://i.ibb.co/HNybMT1/mental-health.jpg"
+  },
+  {
+    "id": 3,
+    "serviceName": "Anesthesia",
+    "description": "Our Anesthesiologist are ready to serve you the best possible service. Anesthesia is a treatment using drugs called anesthetics. These drugs keep you from feeling pain during medical procedures.",
+    "iconImg": "https://i.ibb.co/vByVRb7/anesthesia.png",
+    "price": "15",
+    "time": "25",
+    "through": "WhatsApp",
+    "img": "https://i.ibb.co/t8hz4rQ/anesthesia.jpg"
+  },
+  {
+    "id": 4,
+    "serviceName": "Immunology",
+    "description": "Get your immune system fit by talking to our experts. They are ready online to prescribe you best possible medicines.",
+    "iconImg": "https://i.ibb.co/XDCx12c/antibodies.png",
+    "price": "44",
+    "time": "45",
+    "through": "Google Meet",
+    "img": "https://i.ibb.co/WnrvZ1T/immune.jpg"
+  },
+  {
+    "id": 5,
+    "serviceName": "Dermatology",
+    "description": "Show your diseases related to skin, hair, nails, and some cosmetic problems. We have dermatologists from top medical colleges.",
+    "iconImg": "https://i.ibb.co/1sjKR4t/dermatology.png",
+    "price": "40",
+    "time": "35",
+    "img": "https://i.ibb.co/bNLfQW5/dermatology.jpg"
+  },
+  {
+    "id": 6,
+    "serviceName": "Cardiology",
+    "description": "Our doctors are specialize in treating diseases of the cardiovascular system — mainly the heart and blood vessels",
+    "iconImg": "https://i.ibb.co/rGW6YFb/pulse.png",
+    "price": "50",
+    "time": "30",
+    "through": "Zoom Call",
+    "img": "https://i.ibb.co/0JM1yM9/cardio.jpg"
+  }
+]
