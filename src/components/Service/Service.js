@@ -17,7 +17,7 @@ const Service = ({ service }) => {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer className='border-0 bg-white'>
-                    <Link to={url} className='fw-bold'>Know More +</Link>
+                    <Link to={url} className='fw-bold bg-warning p-1'>Know More +</Link>
                 </Card.Footer>
             </Card>
         </Col>
