@@ -6,9 +6,10 @@ import { useHistory, useLocation } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import './UserAccount.css';
 
-const UserAccount = () => {
+const UserAccount = () => { 
     const history = useHistory();
     const location = useLocation();
+
     const redirect_uri = location?.state?.from ? location?.state?.from : '/';
     const { setUser, error, setError, createWithEmailAndPassword, logInWithEmailAndPassword, loginWithGoogle, updateUserProfile } = useAuth();
     const [isNew, setIsNew] = useState(false);
@@ -23,7 +24,9 @@ const UserAccount = () => {
                 .then((userCredential) => {
                     const user = userCredential.user;
                     updateUserProfile(data.name)
-                        .then(setUser(user));
+                        .then(() => setUser(user))
+                        // to reload and get the user's name
+                        .then(() => window.location.reload())
                 })
                 .then(() => history.push(redirect_uri))
                 .catch((error) => {

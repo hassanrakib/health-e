@@ -35,7 +35,8 @@ const TopNav = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto">
                         <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
-                        <Nav.Link as={NavLink} to="/pricing">Pricing</Nav.Link>
+                        <Nav.Link as={NavLink} to="/appointments">Appointments</Nav.Link>
+                        <Nav.Link as={NavLink} to="/app">Get App</Nav.Link>
                     </Nav>
                     <Button variant="info" className='text-white px-2' onClick={handleLoginAndOutBtn}>
                         <FontAwesomeIcon icon={faUser} className='me-2' />

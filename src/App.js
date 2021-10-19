@@ -10,6 +10,8 @@ import UserAccount from './components/UserAccount/UserAccount';
 import AuthProvider from './contexts/AuthProvider';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import ManageAppointments from './components/ManageAppointments/ManageAppointments';
+import GetApp from './components/GetApp/GetApp';
 
 function App() {
   return (
@@ -29,8 +31,14 @@ function App() {
             <PrivateRoute path='/service/:id'>
               <ServiceDetails></ServiceDetails>
             </PrivateRoute>
+            <PrivateRoute path='/appointments'>
+              <ManageAppointments></ManageAppointments>
+            </PrivateRoute>
             <Route path='/login'>
               <UserAccount></UserAccount>
+            </Route>
+            <Route path='/app'>
+              <GetApp></GetApp>
             </Route>
             <Route path='*'>
               <PageNotFound></PageNotFound>
