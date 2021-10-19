@@ -10,7 +10,7 @@ const UserAccount = () => {
     const history = useHistory();
     const location = useLocation();
     const redirect_uri = location?.state?.from ? location?.state?.from : '/';
-    const { setUser, error, setError, createWithEmailAndPassword, logInWithEmailAndPassword, loginWithGoogle } = useAuth();
+    const { setUser, error, setError, createWithEmailAndPassword, logInWithEmailAndPassword, loginWithGoogle, updateUserProfile } = useAuth();
     const [isNew, setIsNew] = useState(false);
     const toogle = () => {
         setError('');
@@ -22,8 +22,8 @@ const UserAccount = () => {
             createWithEmailAndPassword(data.email, data.password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    user.displayName = data.displayName;
-                    setUser(user);
+                    updateUserProfile(data.name)
+                        .then(setUser(user));
                 })
                 .then(() => history.push(redirect_uri))
                 .catch((error) => {
@@ -67,7 +67,7 @@ const UserAccount = () => {
                         isNew &&
                         <div>
                             <label>Full Name:</label>
-                            <input className='d-block mb-2 w-100 border-1 rounded-1' type='text' {...register("displayName", { required: true })} />
+                            <input className='d-block mb-2 w-100 border-1 rounded-1' type='text' {...register("name", { required: true })} />
                         </div>
                     }
                     <label>Email:</label>

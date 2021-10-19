@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, updateProfile } from "firebase/auth";
 import initializeFirebase from "../Firebase/firebase.init";
 
 initializeFirebase();
@@ -8,6 +8,7 @@ const useFirebase = () => {
     const auth = getAuth();
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     const authProviderGoogle = new GoogleAuthProvider();
 
     // create user with email and password
@@ -25,17 +26,12 @@ const useFirebase = () => {
         return signInWithPopup(auth, authProviderGoogle)
     }
 
-    // get the current user
-    useEffect(() => {
-        const unsubscribed = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser({});
-            }
-        });
-        return () => unsubscribed;
-    }, [auth]);
+    // update user profile
+    const updateUserProfile = (name) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name
+        })
+    }
 
     // user sign out
     const logOut = () => {
@@ -46,8 +42,22 @@ const useFirebase = () => {
         });
     }
 
+    // get the current user
+    useEffect(() => {
+        setIsLoading(true)
+        const unsubscribed = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser({});
+            }
+            setIsLoading(false)
+        });
+        return () => unsubscribed;
+    }, [auth]);
+
     return {
-        user, error, setError, setUser, createWithEmailAndPassword, logInWithEmailAndPassword, loginWithGoogle, logOut
+        user, error, setError, setUser, createWithEmailAndPassword, logInWithEmailAndPassword, loginWithGoogle, logOut, isLoading, setIsLoading, updateUserProfile
     }
 }
 

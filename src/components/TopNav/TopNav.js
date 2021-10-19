@@ -40,7 +40,7 @@ const TopNav = () => {
                     <Button variant="info" className='text-white px-2' onClick={handleLoginAndOutBtn}>
                         <FontAwesomeIcon icon={faUser} className='me-2' />
                         {
-                            user.email ? 'Logout' : 'Login'
+                            user.email ? `${user.displayName} | Logout` : 'Login'
                         }
                     </Button>
                 </Navbar.Collapse>

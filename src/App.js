@@ -9,6 +9,7 @@ import ServiceDetails from './components/ServiceDetails/ServiceDetails';
 import UserAccount from './components/UserAccount/UserAccount';
 import AuthProvider from './contexts/AuthProvider';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
             </PrivateRoute>
             <Route path='/login'>
               <UserAccount></UserAccount>
+            </Route>
+            <Route path='*'>
+              <PageNotFound></PageNotFound>
             </Route>
           </Switch>
           <Footer></Footer>
