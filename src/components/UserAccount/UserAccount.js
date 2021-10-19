@@ -2,11 +2,15 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory, useLocation } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import './UserAccount.css';
 
 const UserAccount = () => {
-    const { error, setError, createWithEmailAndPassword, logInWithEmailAndPassword, loginWithGoogle } = useAuth();
+    const history = useHistory();
+    const location = useLocation();
+    const redirect_uri = location?.state?.from ? location?.state?.from : '/';
+    const { setUser, error, setError, createWithEmailAndPassword, logInWithEmailAndPassword, loginWithGoogle } = useAuth();
     const [isNew, setIsNew] = useState(false);
     const toogle = () => {
         setError('');
@@ -15,10 +19,40 @@ const UserAccount = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         if (isNew) {
-            createWithEmailAndPassword(data.displayName, data.email, data.password);
+            createWithEmailAndPassword(data.email, data.password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    user.displayName = data.displayName;
+                    setUser(user);
+                })
+                .then(() => history.push(redirect_uri))
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    setError(errorMessage);
+                });
         } else {
-            logInWithEmailAndPassword(data.email, data.password);
+            logInWithEmailAndPassword(data.email, data.password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    setUser(user);
+                })
+                .then(() => history.push(redirect_uri))
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    setError(errorMessage);
+                });
         }
+    }
+
+    const handleLoginWithGoogle = () => {
+        loginWithGoogle()
+            .then((result) => {
+                setUser(result.user);
+            })
+            .then(() => history.push(redirect_uri))
+            .catch((error) => {
+                setError(error.message);
+            });
     }
     return (
         <div className='user-account d-flex flex-column align-items-center'>
@@ -45,7 +79,7 @@ const UserAccount = () => {
                 <p className='text-danger'>{error}</p>
                 <p className='mt-2 text-decoration-underline' style={{ cursor: 'pointer' }} onClick={toogle}>{isNew ? 'Registered' : 'New'} in Health-<span className='text-primary fw-bold'>E</span>?</p>
                 <hr />
-                <p className='border p-2' style={{ cursor: 'pointer' }} onClick={loginWithGoogle}><FontAwesomeIcon icon={faGoogle} className='me-2' />Sign In</p>
+                <p className='border p-2' style={{ cursor: 'pointer' }} onClick={handleLoginWithGoogle}><FontAwesomeIcon icon={faGoogle} className='me-2' />Sign In</p>
             </div>
         </div>
     );

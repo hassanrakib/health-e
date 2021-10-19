@@ -6,9 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import './TopNav.css';
 import useAuth from '../../hooks/useAuth';
+import { useHistory } from 'react-router';
 
 const TopNav = () => {
-    const {user, logOut} = useAuth();
+    const { user, logOut } = useAuth();
+    const history = useHistory();
+    const handleLoginAndOutBtn = () => {
+        if (user.email) {
+            logOut();
+        } else {
+            history.push('/login');
+        }
+    }
     return (
         <Navbar variant="light" collapseOnSelect expand="lg" className='position-absolute w-100 nav-container'>
             <Container>
@@ -28,16 +37,12 @@ const TopNav = () => {
                         <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
                         <Nav.Link as={NavLink} to="/pricing">Pricing</Nav.Link>
                     </Nav>
-                    <Nav>
-                        <Nav.Link as={NavLink} to="/login">
-                            <Button variant="info" className='text-white px-3'>
-                                <FontAwesomeIcon icon={faUser} className='me-2' />
-                                {
-                                    user.email ? 'Logout' : 'Login'
-                                }
-                            </Button>
-                        </Nav.Link>
-                    </Nav>
+                    <Button variant="info" className='text-white px-2' onClick={handleLoginAndOutBtn}>
+                        <FontAwesomeIcon icon={faUser} className='me-2' />
+                        {
+                            user.email ? 'Logout' : 'Login'
+                        }
+                    </Button>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

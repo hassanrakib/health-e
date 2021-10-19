@@ -11,40 +11,18 @@ const useFirebase = () => {
     const authProviderGoogle = new GoogleAuthProvider();
 
     // create user with email and password
-    const createWithEmailAndPassword = (name, email, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                user.displayName = name;
-                setUser(user);
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                setError(errorMessage);
-            });
+    const createWithEmailAndPassword = (email, password) => {
+        return createUserWithEmailAndPassword(auth, email, password)
     }
 
     // sign in with email and password
     const logInWithEmailAndPassword = (email, password) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                setUser(user);
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                setError(errorMessage);
-            });
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
     // sign in with google
     const loginWithGoogle = () => {
-        signInWithPopup(auth, authProviderGoogle)
-            .then((result) => {
-                setUser(result.user);
-            }).catch((error) => {
-                setError(error.message);
-            });
+        return signInWithPopup(auth, authProviderGoogle)
     }
 
     // get the current user
